@@ -1,7 +1,7 @@
 const fs = require("fs");
 
-const sha = 1;
-const environment = "test";
+const sha = 10;
+const environment = "dev";
 const url = "https://hello-cloud-app";
 const date = new Date().toISOString();
 
