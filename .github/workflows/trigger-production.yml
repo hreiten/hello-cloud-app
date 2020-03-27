@@ -9,15 +9,26 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Set environment variables
         uses: allenevans/set-env@v1.1.0
         with:
           ENV: "prod"
           AWS_BUCKET_URL: "hello-cloud-prod"
 
-      - name: Build index for production
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Build index
         run: >-
           GIT_SHA=${{github.sha}} NODE_ENV=${ENV} node src-index/main.js
+
+      - name: Show index
+        run: >-
+          cat index.html
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -26,7 +37,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      - name: Upload index.html to prod env
+      - name: Upload index.html to prod server
         run: >-
           aws s3 cp index.html s3://${AWS_BUCKET_URL}/index.html
           --cache-control no-store
