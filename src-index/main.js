@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const sha = "a580ff98ef102bc6f665497ec698441470b8071d";
+const sha = process.env.GIT_SHA ? process.env.GIT_SHA : 1;
 const environment = process.env.NODE_ENV === "prod" ? "prod" : "dev";
 const url = "https://hello-cloud-assets.s3.eu-north-1.amazonaws.com";
 const date = new Date().toISOString();

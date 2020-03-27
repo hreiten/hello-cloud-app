@@ -60,7 +60,7 @@ jobs:
 
       - name: Build index
         run: >-
-          node src-index/main.js
+          GIT_SHA=${{github.sha}} NODE_ENV=dev node src-index/main.js
 
       - name: Show index
         run: >-
