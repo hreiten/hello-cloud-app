@@ -28,7 +28,7 @@ jobs:
       - name: Set environment variables
         uses: allenevans/set-env@v1.1.0
         with:
-          assets_url: "hello-cloud-assets"
+          ASSETS_URL: "hello-cloud-assets"
 
       - name: Download build from previous step
         uses: actions/download-artifact@v1
@@ -48,7 +48,7 @@ jobs:
 
       - name: Upload assets to assets-bucket
         run: >-
-          aws s3 cp build-${{github.sha}} s3://${assets_url}/assets/${{github.sha}}/
+          aws s3 cp build-${{github.sha}} s3://${ASSETS_URL}/assets/${{github.sha}}/
           --recursive
           --cache-control public,max-age=31536000,immutable
 
@@ -61,8 +61,8 @@ jobs:
       - name: Set environment variables
         uses: allenevans/set-env@v1.1.0
         with:
-          env: "dev"
-          aws_bucket_url: "hello-cloud-dev"
+          ENV: "dev"
+          AWS_BUCKET_URL: "hello-cloud-dev"
 
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
@@ -71,7 +71,7 @@ jobs:
 
       - name: Build index
         run: >-
-          GIT_SHA=${{github.sha}} NODE_ENV=${env} node src-index/main.js
+          GIT_SHA=${{github.sha}} NODE_ENV=${ENV} node src-index/main.js
 
       - name: Show index
         run: >-
@@ -86,5 +86,5 @@ jobs:
 
       - name: Upload index.html to dev server
         run: >-
-          aws s3 cp index.html s3://${aws_bucket_url}/index.html
+          aws s3 cp index.html s3://${AWS_BUCKET_URL}/index.html
           --cache-control no-store

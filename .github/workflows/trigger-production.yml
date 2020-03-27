@@ -12,12 +12,12 @@ jobs:
       - name: Set environment variables
         uses: allenevans/set-env@v1.1.0
         with:
-          env: "prod"
-          aws_url: "hello-cloud-prod"
+          ENV: "prod"
+          AWS_BUCKET_URL: "hello-cloud-prod"
 
       - name: Build index for production
         run: >-
-          GIT_SHA=${{github.sha}} NODE_ENV=${env} node src-index/main.js
+          GIT_SHA=${{github.sha}} NODE_ENV=${ENV} node src-index/main.js
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -28,5 +28,5 @@ jobs:
 
       - name: Upload index.html to prod env
         run: >-
-          aws s3 cp index.html s3://${aws_url}/index.html
+          aws s3 cp index.html s3://${AWS_BUCKET_URL}/index.html
           --cache-control no-store
