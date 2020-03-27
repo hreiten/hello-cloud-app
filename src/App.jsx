@@ -24,6 +24,7 @@ function App() {
       <ColorCircle base={color} />
       <div>{`Build created at ${dateformat(timestamp)}`}</div>
       <div>{`Build deploy at ${dateformat(env.CREATED_AT)}`}</div>
+      <p>Hello there</p>
     </div>
   );
 }

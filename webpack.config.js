@@ -1,13 +1,13 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const moment = require('moment');
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const moment = require("moment");
 
 const config = {
   output: {
-     filename: 'main.js',
-     path: path.resolve(__dirname, 'build')
-   },
+    filename: "main.js",
+    path: path.resolve(__dirname, "build")
+  },
   module: {
     rules: [
       {
@@ -24,29 +24,45 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      timestamp: JSON.stringify(moment().utc().format()),
-      color: function(){
-        const colors = ['OVERSKYET', 'SOLOPPGANG', 'SKYFRITT', 'SOLNEDGANG', 'KVELD', 'NATT', 'REGN', 'GUL', 'GRØNN']
-        return JSON.stringify(colors[Math.floor(Math.random()*colors.length)])
-      }()
+      timestamp: JSON.stringify(
+        moment()
+          .utc()
+          .format()
+      ),
+      color: (function() {
+        const colors = [
+          "OVERSKYET",
+          "SOLOPPGANG",
+          "SKYFRITT",
+          "SOLNEDGANG",
+          "KVELD",
+          "NATT",
+          "REGN",
+          "GUL",
+          "GRØNN"
+        ];
+        return JSON.stringify(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+      })()
     })
   ]
 };
 
 module.exports = (env, argv) => {
-
-  if (argv.mode === 'development') {
+  if (argv.mode === "development") {
     config.plugins.push(
       new HtmlWebpackPlugin({
         chunk: true,
-        title: 'Hotloading index.html for development',
-        template: './dev-index.html',
-        filename: 'dev-index.html'
-      }));
+        title: "Hotloading index.html for development",
+        template: "./index.html",
+        filename: "index.html"
+      })
+    );
     config.devServer = {
-      openPage: 'dev-index.html'
-    }
-  };
+      openPage: "index.html"
+    };
+  }
 
   return config;
 };
