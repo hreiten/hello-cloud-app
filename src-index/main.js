@@ -10,9 +10,12 @@ const index = `<!doctype html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Immutable webapp starterpack</title>
-    <meta name="description" content="Immutable webapp.">
+    <link rel="apple-touch-icon" href="${url}/public/apple-touch-icon.png" />
+    <link rel="manifest" href="${url}/public/manifest.json" />
+    <link rel="shortcut icon" href="${url}/public/favicon.ico" />
+    <meta name="description" content="Hello World implementation of SPA in AWS">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hello Cloud [${environment}]</title>
   </head>
   <body>
        <!-- environment variables -->

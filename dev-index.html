@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link rel="apple-touch-icon" href="./public/apple-touch-icon.png" />
+    <link rel="manifest" href="./public/manifest.json" />
+    <link rel="shortcut icon" href="./public/favicon.ico" />
+    <meta name="description" content="Hello World example of a cloud webpage" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Hello Cloud [dev]</title>
+  </head>
+  <body>
+    <!-- environment variables -->
+    <script>
+      env = {
+        ENV_NAME: "dev",
+        GIT_SHA: "sha",
+        API_URL: "api",
+        CREATED_AT: new Date().toISOString()
+      };
+    </script>
+
+    <!-- application binding -->
+    <app-root></app-root>
+  </body>
+</html>
